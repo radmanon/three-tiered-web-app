@@ -1,16 +1,27 @@
-// AJAX call to retrieve user timeline data
-const userId = '1'; // Replace with the actual user ID
-$.ajax({
-  url: `http://localhost:8000/timeline/${userId}`,
-  method: 'GET',
-  success: function (data) {
-    // Handle the retrieved data and update the UI
-    displayUserTimeline(data);
-  },
-  error: function (error) {
-    console.error('Error retrieving user timeline:', error);
-  },
-});
+// Function to get user timeline based on the input user ID
+function getUserTimeline() {
+  // Get the user ID from the input field
+  const userIdInput = $('#userIdInput').val();
+
+  // Check if the user ID is not empty
+  if (userIdInput.trim() === '') {
+    alert('Please enter a valid User ID');
+    return;
+  }
+
+  // AJAX call to retrieve user timeline data
+  $.ajax({
+    url: `http://localhost:8000/timeline/${userIdInput}`,
+    method: 'GET',
+    success: function (data) {
+      // Handle the retrieved data and update the UI
+      displayUserTimeline(data);
+    },
+    error: function (error) {
+      console.error('Error retrieving user timeline:', error);
+    },
+  });
+}
 
 // Function to display user timeline data on the page
 function displayUserTimeline(data) {
